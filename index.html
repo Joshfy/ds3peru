@@ -620,11 +620,56 @@ dialog::backdrop {
             background: #dbeafe;
             color: #1e40af;
         }
+        .footer-carousel {
+            display: flex;
+            align-items: stretch;
+            gap: 1rem;
+            overflow-x: auto;
+            overflow-y: visible;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+
+            /* 🔧 CLAVE */
+            padding-left: 5vw;
+            padding-right: 5vw;
+        }
+
+        .footer-carousel > div {
+            flex: 0 0 90vw;   /* 🔧 usar vw, no % */
+            max-width: 90vw;
+            scroll-snap-align: center;
+
+            box-sizing: border-box;
+        }
+
+        /* Desktop: vuelve al grid */
+        @media (min-width: 768px) {
+            .footer-carousel {
+                display: grid;
+                padding: 0;
+                overflow: visible;
+                scroll-snap-type: none;
+            }
+
+            .footer-carousel > div {
+                flex: initial;
+                max-width: none;
+            }
+        }
+
+        /* Ocultar scrollbar */
+        .footer-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        .footer-carousel {
+            scrollbar-width: none;
+        }
+
     </style>
 </head>
 <body>
   <!-- NAVEGACIÓN DE CATEGORÍAS -->
-  <nav class="category-nav bg-white border-b border-gray-100 shadow-sm">
+  <nav class="category-nav bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
     <div class="relative">
       <div class="nav-container flex md:justify-evenly overflow-x-auto py-3 px-4 gap-3">
         <!-- Switch Catalyst -->
@@ -700,8 +745,8 @@ dialog::backdrop {
 
 
 
-<!-- Breadcrumbs -->
-<div class="breadcrumbs">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs sticky top-16 bg-white z-40 border-b border-gray-200 shadow-sm">
     <nav class="max-w-7xl mx-auto p-3">
         <a href="#" class="breadcrumb-link">Inicio</a>
         <span class="mx-2 text-gray-400">/</span>
@@ -709,6 +754,7 @@ dialog::backdrop {
         <span class="mx-2 text-gray-400">/</span>
         <a href="#" class="breadcrumb-link">Cable de red Cat 6</a>
         <span class="mx-2 text-gray-400">/</span>
+        <br>
         <span class="text-gray-900 font-semibold">6-1427200-4</span>
     </nav>
 </div>
@@ -1108,7 +1154,7 @@ dialog::backdrop {
 <!-- Footer -->
 <footer class="py-12 px-4">
     <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+<div class="footer-carousel md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             <!-- Columna 1: Logo y contacto -->
             <div class="space-y-6">
 
